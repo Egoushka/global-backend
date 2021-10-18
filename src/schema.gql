@@ -1,0 +1,59 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PlatformDto {
+  """Platform id"""
+  id: Float!
+
+  """Platform name"""
+  name: String!
+}
+
+type Platform {
+  """Platform id"""
+  id: Float!
+
+  """Platform name"""
+  name: String!
+}
+
+type Query {
+  getAll: [PlatformDto!]!
+  getSome(getPlatformInput: GetPlatformInput!): [PlatformDto!]!
+}
+
+input GetPlatformInput {
+  """id of platform"""
+  id: ID
+
+  """name of platform"""
+  name: String
+}
+
+type Mutation {
+  createPlatform(createPlatformInput: CreatePlatformInput!): Platform!
+  updatePlatform(updatePlatformInput: UpdatePlatformInput!): PlatformDto!
+  removePlatform(deletePlatformInput: DeletePlatformInput!): String!
+}
+
+input CreatePlatformInput {
+  """name of platform"""
+  name: String!
+}
+
+input UpdatePlatformInput {
+  """name of platform"""
+  name: String!
+
+  """id"""
+  id: ID!
+}
+
+input DeletePlatformInput {
+  """id of platform to find"""
+  id: Int
+
+  """name of platform to find"""
+  name: String
+}

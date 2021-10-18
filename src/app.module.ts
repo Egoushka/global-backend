@@ -1,10 +1,21 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { GraphQLModule } from '@nestjs/graphql';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
+import { Connection } from 'typeorm';
+import { configService } from './config/configservice.service';
+import { PlatformsModule } from './platforms/platforms.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    GraphQLModule.forRoot({
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
+    PlatformsModule,
+    TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
+  ],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private connection: Connection){}
+}
